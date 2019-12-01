@@ -12,13 +12,13 @@ OneWire oneWire(ONE_WIRE_BUS); // setup oneWire instance to communicate with any
 DallasTemperature sensors(&oneWire); // pass our oneWire reference to Dallas Temperature
 
 #define RED_PIN 11
-#define GREEN_PIN 10
-#define BLUE_PIN 9
+#define GREEN_PIN 9
+#define BLUE_PIN 10
 
-int blue = 255, red = 0; // variables
+int green = 255, red = 0; // variables
 
-void setLED(int blue, int red) {
-  analogWrite(BLUE_PIN, blue);
+void setLED(int green, int red) {
+  analogWrite(GREEN_PIN, green);
   analogWrite(RED_PIN, red);
 }
 
@@ -45,8 +45,8 @@ void loop(void) {
   Serial.println(" °C");
   if (temp <= 28.00 && temp > 25.00) { // max and min limits
     red = map((int) (temp * 100), 2500, 2800, 0, 255);
-    blue = 255 - red;
+    green = 255 - red;
   }
-  setLED(blue, red);
+  setLED(green, red);
   delay(10);
 }
